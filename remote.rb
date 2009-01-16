@@ -6,8 +6,8 @@ class Remote
     end
 
     def getJobs
-        job1 = Job.new("git://x/z")
-        job2 = Job.new("git://x/y")
+        job1 = Job.new("/tmp/z")
+        job2 = Job.new("/tmp/y")
         return [job1, job2]
     end
 
