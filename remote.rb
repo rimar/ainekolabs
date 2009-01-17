@@ -1,18 +1,18 @@
 require 'job'
 
 class Remote
-    def register
+  def register
 
-    end
+  end
 
-    def getJobs
-        job1 = Job.new("/tmp/z")
-        job2 = Job.new("/tmp/y")
-        return [job1, job2]
-    end
+  def getJobs
+    job1 = Job.new("/tmp/z")
+    job2 = Job.new("/tmp/y")
+    return [job1, job2]
+  end
 
-    def reportStatistics
+  def reportStatistics
 
-    end
+  end
 end
 
