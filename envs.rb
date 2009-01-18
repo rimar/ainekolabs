@@ -1,9 +1,9 @@
 module Envs
-  def home
-   @home ||= ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH']
+  def self.homedir
+   @@homedir ||= ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH']
   end
-  def aineko
-    @aineko ||= home + "/.aineko"
+  def self.ainekodir
+    @@ainekoidir ||= homedir + "/.aineko"
   end
 end
 

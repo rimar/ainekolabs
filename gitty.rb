@@ -4,7 +4,6 @@ require 'git'
 require 'envs'
 
 class Gitty
-  include Envs
   attr_reader :name, :url, :path
   def initialize(url) @url = url end
   def update
@@ -36,7 +35,7 @@ class Gitty
 
   def parseUrl
     @name = @url.split('/').last.delete(".git")
-    @path = aineko + '/' + @name
+    @path = Envs.ainekodir + '/' + @name
   end	
 
 end	
