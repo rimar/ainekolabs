@@ -6,9 +6,7 @@ class Remote
   end
 
   def getJobs
-    job1 = Job.new("/tmp/z")
-    job2 = Job.new("/tmp/y")
-    return [job1, job2]
+    [Job.new(Job::START, ["/tmp/z","/tmp/y"])]
   end
 
   def reportStatistics

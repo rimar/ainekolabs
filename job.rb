@@ -1,4 +1,9 @@
 class Job
-  attr_accessor :url
-  def initialize(url) @url = url end
+  START=0
+  STOP=1
+  attr_accessor :urls, :command
+  def initialize(command, urls) 
+    @command = command
+    @urls = urls 
+  end
 end

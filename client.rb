@@ -7,9 +7,11 @@ class Client
     @remote.register
     j = @remote.getJobs
     for job in j do
-      git = Gitty.new(job.url)
-      updated = git.update
-      require git.name
+      for url in job.urls
+        git = Gitty.new(url)
+        updated = git.update
+        require git.name
+      end
     end
     @remote.reportStatistics
   end
