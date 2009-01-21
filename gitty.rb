@@ -24,6 +24,7 @@ class Gitty
 
   def pull
     repo = Git.open(@path)
+    #TODO: pull doesn't seem to work
     repo.pull
   end	
 
@@ -34,7 +35,8 @@ class Gitty
   end
 
   def parseUrl
-    @name = @url.split('/').last.delete(".git")
+    # Extracting: git://github.com/rimar/tttbot.git => tttbot
+    @name = @url.split('/').last.sub(/\.git/, '')
     @path = Envs.ainekodir + '/' + @name
   end	
 
