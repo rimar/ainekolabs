@@ -24,8 +24,8 @@ class Gitty
 
   def pull
     repo = Git.open(@path)
-    #TODO: pull doesn't seem to work
-    repo.pull
+    repo.fetch
+    repo.merge("origin/master")
   end	
 
   def loadPrep
