@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 require 'fileutils'
 require 'rubygems'
 require 'git'
@@ -42,7 +43,9 @@ class Gitty
 
 end	
 
-#
-#f = File.new("#{name}/#{@name}.rb", "w")
-#f.puts("puts(\"Executing file: #{@name}.rb\")")
-#f.close
+if $0 == __FILE__
+  puts $*
+  g = Gitty.new($*[0])
+  g.update
+end
+

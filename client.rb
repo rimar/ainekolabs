@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 require 'find'
 require 'date'
 require 'envs'
