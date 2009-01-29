@@ -5,11 +5,12 @@ require 'envs'
 
 class Gitty
   def update(url)
+    name = Envs.giturl2name(url)
     path = Envs.name2path(name)
     if (FileTest.exist?(path + "/.git"))
-      pull
+      pull(path)
     else 
-      init
+      init(url, path)
     end
   end
 
