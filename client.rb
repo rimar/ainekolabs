@@ -1,5 +1,4 @@
 #!/usr/bin/ruby
-require 'find'
 require 'date'
 require 'envs'
 
@@ -7,16 +6,18 @@ class Client
   def initialize() @shouldRun = true end
   def main
     while (@shouldRun) do
-      Find.find(Envs.ainekodir) do |path|
-        next if path == Envs.ainekodir
-        if FileTest.directory?(path)
-          puts(path)
-          Find.prune
-        end
+      Envs.each_pap do |path|
+        run(path)
       end
       puts DateTime.now
       sleep(2)
     end
+  end
+
+  def run(path)
+    puts "path=" + path
+    name = Envs.path2name(path)
+    puts "name=" + name
   end
 end
 

@@ -1,51 +1,44 @@
 #!/usr/bin/ruby
-require 'fileutils'
 require 'rubygems'
 require 'git'
 require 'envs'
 
 class Gitty
-  attr_reader :name, :url, :path
-  def initialize(url) @url = url end
-  def update
-    parseUrl
-    if (FileTest.exist?(@path + "/.git"))
-      puts (@path + " has git repo")
+  def update(url)
+    path = Envs.name2path(name)
+    if (FileTest.exist?(path + "/.git"))
       pull
     else 
-      puts(@path + " has no git repo")
       init
     end
-    loadPrep
   end
 
-  def init
-    Git.clone(@url, @path)
+  def init(url, path)
+    puts("cloning " + path)
+    Git.clone(url, path)
   end
 
-  def pull
-    repo = Git.open(@path)
+  def pull(path)
+    puts("pulling " + path)
+    repo = Git.open(path)
     repo.fetch
     repo.merge("origin/master")
   end	
 
-  def loadPrep
-    # Add the directory where it's checked out to the load path
-    $LOAD_PATH<<@path if !$LOAD_PATH.include?(@path)
-    $".delete(@name + "rb")
+  def updateAll
+    Envs.each_pap do |path| 
+      pull(path)
+    end
   end
-
-  def parseUrl
-    # Extracting: git://github.com/rimar/tttbot.git => tttbot
-    @name = @url.split('/').last.sub(/\.git/, '')
-    @path = Envs.ainekodir + '/' + @name
-  end	
-
 end	
 
 if $0 == __FILE__
-  puts $*
-  g = Gitty.new($*[0])
-  g.update
+  puts($*)
+  g = Gitty.new
+  if ($*.size == 0)
+    g.updateAll
+  else
+    g.update($*[0])
+  end
 end
 
