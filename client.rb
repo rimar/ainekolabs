@@ -18,6 +18,8 @@ class Client
     puts "path=" + path
     name = Envs.path2name(path)
     puts "name=" + name
+    Envs.loadPrep(name)
+    require name
   end
 end
 
