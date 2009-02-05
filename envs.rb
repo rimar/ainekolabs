@@ -1,17 +1,17 @@
 require 'find'
 
 module Envs
-  def self.homedir
-   @@homedir ||= ENV['HOME'] || ENV['HOMEDRIVE'] + ENV['HOMEPATH']
-  end
   def self.ainekodir
-    @@ainekoidir ||= homedir + "/.aineko"
+    File.expand_path("~/.aineko")
   end
 
   def self.loadPrep(name)
     # Add the directory where it's checked out to the load path
     path = name2path(name)
     $LOAD_PATH<<path if !$LOAD_PATH.include?(path)
+  end
+
+  def self.reloadPrep(name)
     $".delete(name + ".rb")
   end
 
