@@ -1,6 +1,7 @@
 #!/usr/bin/ruby
 require 'date'
 require 'envs'
+require 'yaml'
 
 class Client
   def initialize() @shouldRun = true end
@@ -35,14 +36,21 @@ class Client
         pap = bot['type']
         #TODO handle properties of different types, e.g. simple/bot/private
         properties = bot['properties']
+        bots = bot['bots']
         #TODO handle dependencies
         bot_inst = method(pap).call
         @container[id] = bot_inst
         if properties 
           properties.each{|key, value|
+            bot_inst.instance_variable_set("@#{key}", value)
+          } 
+        end
+        if bots 
+          bots.each{|key, value|
             bot_inst.instance_variable_set("@#{key}", @container[value])
           } 
         end
+
       }
     end
   end
