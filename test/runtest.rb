@@ -1,4 +1,5 @@
-require 'conf'
+require 'rubygems'
+require 'aineko'
 
 class Foo
   conf :a, :b

@@ -1,4 +1,3 @@
-#!/usr/bin/ruby
 require 'date'
 require 'envs'
 require 'yaml'

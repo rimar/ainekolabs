@@ -1,11 +1,18 @@
-#!/bin/ruby
-require 'conf'
+#!/usr/bin/ruby
+#require 'conf'
 
 module Aineko
-  def inspect(pap)
-    puts "inspect #{pap}"
-    #load pap
+  class Runner
+    def inspect(pap)
+      puts "inspecting #{pap[0]}"
+      #load pap
+    end
+
+    def invoke(args)
+      send(args[0], args[1..1000])
+    end
   end
 end
 
+Aineko::Runner.new.invoke($*)
 

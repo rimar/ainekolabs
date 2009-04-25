@@ -1,4 +1,3 @@
-#!/usr/bin/ruby
 require 'rubygems'
 require 'git'
 require 'envs'
@@ -24,14 +23,14 @@ class Gitty
     repo = Git.open(path)
     repo.fetch
     repo.merge("origin/master")
-  end	
+  end
 
   def updateAll
     Envs.each_pap do |path| 
       pull(path)
     end
   end
-end	
+end
 
 if $0 == __FILE__
   puts($*)
