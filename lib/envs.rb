@@ -18,7 +18,7 @@ module Envs
   def self.giturl2name(url)
     # Extracting: git://github.com/rimar/tttbot.git => tttbot
     url.split('/').last.sub(/\.git/, '')
-  end	
+  end
 
   def self.name2path(name)
     Envs.ainekodir + '/' + name

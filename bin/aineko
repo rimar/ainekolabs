@@ -1,0 +1,11 @@
+#!/bin/ruby
+require 'conf'
+
+module Aineko
+  def inspect(pap)
+    puts "inspect #{pap}"
+    #load pap
+  end
+end
+
+
