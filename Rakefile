@@ -2,9 +2,11 @@ require 'rubygems'
 require 'rake/gempackagetask'
 require 'rake/clean'
 
+AI_VERSION = "0.1.0"
+AI_GEMNAME = "aineko"
 spec = Gem::Specification.new do |s|
-  s.name       = "aineko"
-  s.version    = "0.1.0"
+  s.name       = AI_GEMNAME
+  s.version    = AI_VERSION
   s.author     = "Yuavl Rimar"
   s.email      = "yuval dot rimar at gmail dot com"
   s.homepage   = "http://ainekolabs.org"
@@ -30,6 +32,14 @@ task :default => [:package]
 
 task :test do
   ruby "test/runtest.rb"
+end
+
+task :install do
+  puts `sudo gem install -l pkg/#{AI_GEMNAME}-#{AI_VERSION}.gem`
+end
+
+task :remove do
+  puts `sudo gem uninstall -x #{AI_GEMNAME}`
 end
 
 CLEAN.include("pkg") 

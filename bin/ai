@@ -1,10 +1,15 @@
 #!/usr/bin/ruby
-require 'rubygems'
+if File.exists?(File.join(File.dirname(__FILE__),"..","lib","aineko.rb"))
+  aipath = File.join(File.dirname(__FILE__),"..","lib")
+  $LOAD_PATH<<aipath if !$LOAD_PATH.include?(aipath)
+else
+  require 'rubygems'
+end
 require 'aineko'
 
 module Aineko
   class Runner
-    def run(args)
+    def __run__(args)
       if args.length == 0 
         help
         return
@@ -38,5 +43,5 @@ module Aineko
   end
 end
 
-Aineko::Runner.new.run($*)
+Aineko::Runner.new.__run__($*)
 

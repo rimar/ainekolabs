@@ -4,7 +4,7 @@ module Conf
     names.each do |name| 
       module_eval <<-"end;"
         def #{name}
-          "#{name.to_s * 3} #{self.to_s}"
+          "#{name.to_s * 3} : #{self.to_s} : " + self.to_s
         end
       end;
     end

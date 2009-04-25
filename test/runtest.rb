@@ -1,15 +1,3 @@
-require 'rubygems'
-require 'aineko'
 
-class Foo
-  conf :a, :b
-  def bar
-    puts "a=" + a
-    puts "b=" + b
-    
-  end
-end
-
-
-Foo.new.bar
-Foo.new.bar
+require File.join(File.dirname(__FILE__),"..","lib","aineko")
+require 'conf_test.rb'
