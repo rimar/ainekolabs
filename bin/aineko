@@ -9,7 +9,12 @@ module Aineko
     end
 
     def invoke(args)
-      send(args[0], args[1..1000])
+      meth = args.shift
+      begin
+        send(meth, args)
+      rescue NoMethodError
+        puts "Method not supported: #{meth}"
+      end
     end
   end
 end
