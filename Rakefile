@@ -11,12 +11,15 @@ spec = Gem::Specification.new do |s|
   s.platform   = Gem::Platform::RUBY
   s.summary    = "Aineko personal automation platform"
   s.files      = FileList["{bin,docs,lib,test}/**/*"].exclude("rdoc").to_a
+  s.bindir       = "bin"
+  s.executables  = %w( ai )
   s.description       = "Aineko is used to run bots and agents"
   s.rubyforge_project = s.name
   s.require_path      = "lib"
   s.test_file         = "test/runtest.rb"
   s.has_rdoc          = true
   s.extra_rdoc_files  = ['README']
+  s.add_dependency "git"
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
