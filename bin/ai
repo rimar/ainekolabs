@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
-if File.exists?(File.join(File.dirname(__FILE__),"..","lib","aineko.rb"))
+aipath = File.join(File.dirname(__FILE__),"..","lib")
+if File.exists?(File.join(aipath,"aineko.rb"))
   # set up load path in dev env
-  aipath = File.join(File.dirname(__FILE__),"..","lib")
   $LOAD_PATH<<aipath if !$LOAD_PATH.include?(aipath)
 else
   require 'rubygems'

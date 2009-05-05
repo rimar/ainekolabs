@@ -4,28 +4,28 @@ module Aineko
   module Conf
     # Add support for conf :x, :y notation
     def conf(*names)
-      # add all names to the @@confs class variable and a getter
-      self.instance_eval do
-        @confs = names 
-        def confs() @confs end
-      end
+      __declare__(:conf, names)
       # add methods named 'name' that return configuration value with the key 'name'
+      __inject__(names) { |n| Config.get(self, n.to_s)} 
+    end
+
+    def __declare__(sym, names)
+      define_method(sym.to_s + "_list", lambda { names })
+    end
+
+    def __inject__(names, &block)
       names.each do |name| 
-        module_eval <<-"end;"
-        def #{name}
-          Configuration.get(self, "#{name}")
-        end
-      end;
+        self.send(:define_method, name, lambda {block.call(name)})
       end
     end
   end
 
   # Encapsulate bot's configuration
-  class Configuration
+  class Config
     attr_accessor :id, :type, :params
     def self.get(obj, name)
       # TODO: read from file/git
-      cfg = Configuration.new
+      cfg = self.new
       cfg.params = {}
       cfg.params["a"] = "AHA"
       cfg.params["b"] = "UHU"

@@ -29,12 +29,27 @@ module Aineko
       puts "usage: ai command [bot] [options]"
       puts "  Commands:"
       protected_methods.each do |meth|
-        puts "    " + meth.to_s
+        helpstr = "    " + meth.to_s
+        desc_method = meth.to_s + "_help"
+        helpstr += " : " + send(desc_method) if respond_to?(desc_method, true)
+        puts helpstr
       end
     end
 
     def git(urls)
       Gitty.new.update(urls[0])
+    end
+
+    def conf(path)
+      load(path)
+    end
+    private
+    def help_help
+      "this message"
+    end
+
+    def git_help
+      "fetch bot from git repo"
     end
 
   end
