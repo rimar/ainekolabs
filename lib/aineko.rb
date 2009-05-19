@@ -41,13 +41,18 @@ module Aineko
     end
 
     def conf(path)
-      load(path[0])
-      p Configured.list
+      Configurator.cfg(path[0])
+    end
+    
+    def test(z)
+      puts "hmm:"
+      i = gets
+      puts "i read #{i}"
     end
 
     private
     def conf_help
-      "Display bot conf"
+      "record bot configuration"
     end
 
     def git_help

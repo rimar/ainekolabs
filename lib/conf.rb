@@ -1,4 +1,3 @@
-require 'rubygems'
 
 module Aineko
   module Conf
@@ -7,7 +6,7 @@ module Aineko
       __declare__(:conf, names)
       # add methods named 'name' that return configuration value with the key 'name'
       __inject__(names) { |n| Config.get(self, n.to_s)} 
-      Configured.list << self
+      Configurator.list << self
     end
 
     def __declare__(sym, names)
@@ -21,10 +20,25 @@ module Aineko
     end
   end
 
-  class Configured
+  class Configurator
     class<<self
       def list
         @list ||= []
+      end
+      def cfg(path)
+        load(path)
+        clazz = @list[@list.size - 1]
+        bot = clazz.new
+        config = Config.new
+        config.type = clazz.to_s
+        print "Insert " + clazz.to_s + " ID: "
+        config.id = STDIN.gets.chop
+
+        bot.conf_list.each do |meth| 
+          print "Insert the value of " + meth.to_s + ": "
+          config.params[meth] = STDIN.gets.chop
+        end
+        puts config.to_yaml
       end
     end
   end
