@@ -41,17 +41,22 @@ module Aineko
     end
 
     def conf(path)
-      load(path)
+      load(path[0])
+      p Configured.list
     end
+
     private
-    def help_help
-      "this message"
+    def conf_help
+      "Display bot conf"
     end
 
     def git_help
       "fetch bot from git repo"
     end
 
+    def help_help
+      "this message"
+    end
   end
 end
 

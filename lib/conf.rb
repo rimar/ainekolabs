@@ -7,6 +7,7 @@ module Aineko
       __declare__(:conf, names)
       # add methods named 'name' that return configuration value with the key 'name'
       __inject__(names) { |n| Config.get(self, n.to_s)} 
+      Configured.list << self
     end
 
     def __declare__(sym, names)
@@ -20,9 +21,21 @@ module Aineko
     end
   end
 
+  class Configured
+    class<<self
+      def list
+        @list ||= []
+      end
+    end
+  end
+
   # Encapsulate bot's configuration
   class Config
     attr_accessor :id, :type, :params
+    def initialize
+      @params = {}
+    end
+
     def self.get(obj, name)
       # TODO: read from file/git
       cfg = self.new

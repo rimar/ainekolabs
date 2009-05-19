@@ -7,6 +7,5 @@ else
   require 'rubygems'
 end
 require 'aineko'
-
 Aineko::Runner.new.__run__($*)
 
